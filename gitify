@@ -1,0 +1,12 @@
+mv "$1" "$1.temp"
+git init --bare "$1"
+mkdir "$1.local"
+git clone "$1" "$1.local"
+mv -v "$1.temp"/* "$1.local/"
+cp .gitignore "$1.local/.gitignore"
+cd "$1.local"
+git add .
+git commit -m "Init"
+git push
+cd ..
+rm -rf "$1.local" "$1.temp"
